@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eckmerald.github.io/kafedra_plavania/sitemap.xml
