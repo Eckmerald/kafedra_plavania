@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="M2WdfFNApBPuahXOIUcbIuU3iDZOhokkuw_TCbotBow">
-<meta name="yandex-verification" content="af2409f397d5245b" />
 <meta name="description" content="Обучение плаванию в вашем городе. Тренировки для детей и взрослых. Индивидуальные и групповые занятия в бассейне.">
 <meta name="keywords" content="плавание в городе, обучение плаванию, бассейн, тренировки плавание">
 <meta name="robots" content="index, follow">
@@ -1228,6 +1227,295 @@ footer {
 .fadein-d1 { animation: fadeUp .65s .15s both; }
 .fadein-d2 { animation: fadeUp .65s .3s  both; }
 .fadein-d3 { animation: fadeUp .65s .45s both; }
+
+/* ─────────────────────────────────────────────
+   BURGER MENU
+───────────────────────────────────────────── */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  margin-left: auto;
+  z-index: 1001;
+  background: none;
+  padding: 4px;
+}
+.burger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform .3s, opacity .3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(20,42,90,0.97);
+  z-index: 998;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 100px 30px 40px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+  opacity: 0.9;
+  transition: opacity .2s;
+}
+.mobile-menu a:hover,
+.mobile-menu a.active { opacity: 1; font-weight: 700; }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — TABLET (≤ 1024px)
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* Nav */
+  .navbar { padding: 0 24px; height: 70px; }
+  .nav-logo-img { width: 54px; height: 54px; }
+  .nav-brand-text { font-size: 13px; }
+  .nav-line { display: none; }
+  .nav-links { gap: 22px; }
+  .nav-links a { font-size: 13px; }
+
+  /* Hero */
+  .hero { padding: 110px 60px 60px; }
+  .hero-title { font-size: 38px; }
+  .hero-bg-img-small { width: 50%; }
+
+  /* Sections */
+  .welcome-section { padding: 50px 60px 30px; }
+  .big-quote { padding: 44px 60px 34px; }
+  .big-quote p { font-size: 26px; }
+  .pool-image-section { padding: 40px 60px 0; }
+  .values-content { padding: 0 60px; }
+  .achievements-section { padding: 50px 60px 50px; }
+  .section-interested { padding: 50px 60px 0; }
+
+  /* Footer */
+  footer { padding: 50px 60px 0; }
+  .footer-line { margin: 0 -60px; }
+
+  /* About */
+  .about-hero { padding: 100px 60px 60px; grid-template-columns: 1fr 1fr; }
+  .about-hero-photo { height: 500px; }
+  .why-section { padding: 50px 60px; }
+  .specialists-section { padding: 50px 60px 40px; }
+
+  /* Services */
+  .services-hero { padding: 110px 60px 40px; }
+  .service-list { padding: 0 60px 50px; }
+  .service-card { grid-template-columns: 300px 1fr; }
+  .service-card.flip { grid-template-columns: 1fr 300px; }
+  .reviews-section { padding: 60px 60px 70px; }
+
+  /* News */
+  .news-hero { padding: 110px 60px 40px; }
+  .news-layout { padding: 0 60px 50px; grid-template-columns: 1fr 1fr; }
+
+  /* Contact */
+  .contact-hero { padding: 110px 60px 40px; }
+  .contact-info-bar { margin: 0 60px 40px; }
+  .infra-section { grid-template-columns: 340px 1fr; }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — MOBILE (≤ 768px)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Nav */
+  .navbar { padding: 0 16px; height: 64px; }
+  .nav-logo-img { width: 44px; height: 44px; }
+  .nav-brand-text { font-size: 12px; max-width: 130px; line-height: 1.2; }
+  .nav-links { display: none; }
+  .burger { display: flex; }
+
+  /* Hero */
+  .hero {
+    padding: 90px 20px 50px;
+    min-height: auto;
+    align-items: center;
+  }
+  .hero-bg-img-small {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+    border-radius: 0;
+  }
+  .hero-content { max-width: 100%; }
+  .hero-subtitle { font-size: 14px; }
+  .hero-title { font-size: 28px; }
+  .hero-desc { font-size: 13px; line-height: 1.75; }
+  .btn-hero { padding: 14px 30px; font-size: 14px; }
+
+  /* Welcome */
+  .welcome-section { padding: 36px 16px 20px; }
+  .welcome-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .welcome-header h2 { font-size: 20px; }
+  .btn-view-all { font-size: 14px; padding: 8px 20px; }
+  .photo-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .photo-row img { height: 160px; }
+
+  /* Big quote */
+  .big-quote { padding: 30px 16px 24px; }
+  .big-quote p { font-size: 18px; line-height: 1.6; }
+
+  /* Pool image */
+  .pool-image-section { padding: 24px 16px 0; }
+  .pool-image-section img { height: 220px; border-radius: 14px; }
+
+  /* Values */
+  .values-section { padding: 50px 0 50px; }
+  .values-content { padding: 0 16px; }
+  .values-content h2 { font-size: 20px; }
+  .values-content .values-sub { font-size: 14px; margin-bottom: 30px; }
+  .values-row { grid-template-columns: repeat(2, 1fr); gap: 22px; margin-bottom: 22px; }
+  .values-row2 { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+
+  /* Achievements */
+  .achievements-section { padding: 36px 16px 36px; }
+  .achievements-section h2 { font-size: 22px; margin-bottom: 28px; }
+  .achieve-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+  .achieve-cell { border-radius: 10px; }
+  .achieve-cell img { height: 130px; }
+
+  /* Newsletter */
+  .section-interested { padding: 30px 16px 0; }
+  .section-interested h2 { font-size: 22px; }
+  .section-interested p { font-size: 13px; }
+  .newsletter-box {
+    flex-direction: column;
+    padding: 28px 20px;
+    gap: 24px;
+  }
+  .newsletter-left h3 { font-size: 20px; }
+  .newsletter-left p { font-size: 13px; }
+  .newsletter-form { min-width: 100%; width: 100%; }
+
+  /* Footer */
+  footer { padding: 40px 16px 0; margin-top: 40px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-line { margin: 0 -16px; }
+  .footer-col h4 { font-size: 15px; }
+
+  /* ABOUT */
+  .about-hero {
+    padding: 84px 16px 40px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    min-height: auto;
+  }
+  .about-hero-text h1 { font-size: 28px; }
+  .about-hero-photo { height: 280px; }
+  .about-hero-photo .blob-img { max-height: 280px; }
+  .why-section { padding: 30px 16px 30px; }
+  .why-section h2 { font-size: 20px; }
+  .why-cards { grid-template-columns: 1fr; gap: 16px; }
+  .why-card { height: auto; min-height: 240px; }
+  .infra-section { grid-template-columns: 1fr; min-height: auto; }
+  .infra-img { height: 220px; }
+  .infra-body { padding: 30px 20px; }
+  .infra-body h2 { font-size: 22px; }
+  .specialists-section { padding: 36px 16px 36px; }
+  .specialists-section h2 { font-size: 26px; }
+  .specialist-card { flex-direction: column; }
+  .specialist-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 24px 20px;
+    min-width: unset;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+  .specialist-info { text-align: left; }
+  .specialist-desc { padding: 20px 20px 24px; max-width: 100%; }
+
+  /* SERVICES */
+  .services-hero { padding: 84px 16px 30px; }
+  .services-hero h1 { font-size: 26px; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.15); }
+  .stat-item { padding: 20px 24px; }
+  .service-list { padding: 0 16px 40px; gap: 24px; }
+  .service-card,
+  .service-card.flip {
+    grid-template-columns: 1fr;
+  }
+  .service-card.flip .service-img,
+  .service-card.flip .service-body { order: unset; }
+  .service-img { min-height: 200px; height: 200px; }
+  .service-body { padding: 24px 20px; }
+  .service-body h2 { font-size: 18px; }
+  .reviews-section { padding: 50px 16px 60px; }
+  .reviews-section h2 { font-size: 22px; }
+  .reviews-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  /* NEWS */
+  .news-hero { padding: 84px 16px 30px; }
+  .news-hero h1 { font-size: 30px; }
+  .news-layout {
+    grid-template-columns: 1fr;
+    padding: 0 16px 40px;
+    gap: 20px;
+  }
+  .news-card-body h3 { font-size: 17px; }
+  .tip-card { grid-template-columns: 130px 1fr; }
+  .tip-card img { min-height: 90px; max-height: 120px; }
+
+  /* CONTACT */
+  .contact-hero { padding: 84px 16px 30px; }
+  .contact-hero h1 { font-size: 26px; }
+  .contact-info-bar {
+    grid-template-columns: 1fr;
+    margin: 0 16px 30px;
+    padding: 20px 16px;
+    gap: 16px;
+  }
+  .contact-divider-v { display: none; }
+  .contact-info-item { padding: 0; }
+  .contact-main { grid-template-columns: 1fr; min-height: auto; }
+  .contact-map { height: 280px; position: relative; }
+  .contact-form-wrap { padding: 32px 20px 40px; }
+  .contact-form-wrap h2 { font-size: 22px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .form-submit { justify-content: stretch; }
+  .btn-submit { width: 100%; }
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — SMALL MOBILE (≤ 400px)
+───────────────────────────────────────────── */
+@media (max-width: 400px) {
+  .hero-title { font-size: 24px; }
+  .photo-row { grid-template-columns: 1fr; }
+  .photo-row img { height: 200px; }
+  .achieve-grid { grid-template-columns: 1fr; }
+  .achieve-cell img { height: 160px; }
+  .tip-card { grid-template-columns: 1fr; }
+  .tip-card img { max-height: 150px; width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -1248,7 +1536,19 @@ footer {
     <a href="#" id="nl-news"                onclick="showPage('news');return false;">Новости</a>
     <a href="#" id="nl-contact"             onclick="showPage('contact');return false;">Контакты</a>
   </div>
+  <button class="burger" id="burger" aria-label="Меню" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#" id="ml-home"     class="active" onclick="showPage('home');closeMobileMenu();return false;">Главная страница</a>
+  <a href="#" id="ml-about"               onclick="showPage('about');closeMobileMenu();return false;">О нас</a>
+  <a href="#" id="ml-services"            onclick="showPage('services');closeMobileMenu();return false;">Стоимость</a>
+  <a href="#" id="ml-news"                onclick="showPage('news');closeMobileMenu();return false;">Новости</a>
+  <a href="#" id="ml-contact"             onclick="showPage('contact');closeMobileMenu();return false;">Контакты</a>
+</div>
 
 <!-- ══════════════════════════════════════════
      HOME
@@ -2004,8 +2304,26 @@ function showPage(id) {
     document.getElementById('page-' + p).classList.toggle('active', p === id);
     const nl = document.getElementById('nl-' + p);
     if (nl) nl.classList.toggle('active', p === id);
+    const ml = document.getElementById('ml-' + p);
+    if (ml) ml.classList.toggle('active', p === id);
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const burger = document.getElementById('burger');
+  const isOpen = menu.classList.toggle('open');
+  burger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const burger = document.getElementById('burger');
+  menu.classList.remove('open');
+  burger.classList.remove('open');
+  document.body.style.overflow = '';
 }
 </script>
 </body>
