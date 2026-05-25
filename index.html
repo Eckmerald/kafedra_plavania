@@ -1516,6 +1516,159 @@ footer {
   .tip-card { grid-template-columns: 1fr; }
   .tip-card img { max-height: 150px; width: 100%; }
 }
+
+/* ─────────────────────────────────────────────
+   MODAL
+───────────────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,25,60,0.65);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 44px 44px 36px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(10,25,60,0.25);
+  animation: fadeUp .35s both;
+}
+.modal-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  font-size: 22px;
+  color: #aaa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: color .2s;
+}
+.modal-close:hover { color: #305d9f; }
+.modal-box h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #305d9f;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.modal-box .modal-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.modal-field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #5380c1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.modal-field input,
+.modal-field textarea {
+  background: #f4f7fc;
+  border: 1.5px solid #dde6f5;
+  border-radius: 10px;
+  padding: 13px 16px;
+  font-size: 14px;
+  color: #333;
+  transition: border-color .2s;
+  font-family: 'Poppins', sans-serif;
+}
+.modal-field input:focus,
+.modal-field textarea:focus { border-color: #305d9f; outline: none; }
+.modal-field textarea { resize: vertical; min-height: 90px; }
+.modal-field input::placeholder,
+.modal-field textarea::placeholder { color: #bbb; }
+.modal-submit {
+  width: 100%;
+  background: linear-gradient(103deg, #305d9f 2%, #235193 117%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: transform .2s, box-shadow .2s;
+  font-family: 'Unbounded', sans-serif;
+}
+.modal-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(48,93,159,0.3);
+}
+.modal-submit:disabled {
+  opacity: 0.6;
+  transform: none;
+  cursor: not-allowed;
+}
+.modal-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+  gap: 14px;
+}
+.modal-success .success-icon {
+  font-size: 52px;
+  line-height: 1;
+}
+.modal-success h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #305d9f;
+}
+.modal-success p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+}
+.modal-price-badges {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.price-badge {
+  background: #f0f5ff;
+  border: 2px solid #dde6f5;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #305d9f;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'Unbounded', sans-serif;
+}
+.price-badge.selected,
+.price-badge:hover {
+  background: #305d9f;
+  border-color: #305d9f;
+  color: #fff;
+}
+@media (max-width: 480px) {
+  .modal-box { padding: 32px 20px 24px; }
+  .modal-box h2 { font-size: 18px; }
+}
 </style>
 </head>
 <body>
@@ -1678,8 +1831,8 @@ footer {
         <p>Подпишитесь, чтобы получать последние новости и обновления.<br>Мы обещаем не рассылать вам спам!</p>
       </div>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter email address">
-        <button>Продолжить</button>
+        <input type="email" id="nl-email-1" placeholder="Enter email address">
+        <button onclick="submitNewsletterInline('nl-email-1')">Продолжить</button>
       </div>
     </div>
   </section>
@@ -1839,8 +1992,8 @@ footer {
         <p>Подпишитесь, чтобы получать последние новости и обновления о нас.<br>Мы обещаем не рассылать вам спам!</p>
       </div>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter email address">
-        <button>Продолжить</button>
+        <input type="email" id="nl-email-2" placeholder="Enter email address">
+        <button onclick="submitNewsletterInline('nl-email-2')">Продолжить</button>
       </div>
     </div>
   </section>
@@ -1917,7 +2070,7 @@ footer {
           <p>Абонемент на групповое обучение для детей от 5 лет (1 раз в неделю)</p>
         </div>
         <p style="margin-left:26px;font-weight:600;color:#305d9f">27,50 руб./занятие в абонементе</p>
-        <span class="service-price-tag" style="margin-top:28px">Записаться →</span>
+        <span class="service-price-tag" style="margin-top:28px;cursor:pointer" onclick="openModal('modal-signup')">Записаться →</span>
       </div>
     </div>
 
@@ -1939,7 +2092,7 @@ footer {
           <p>Совершенствование техники для умеющих держаться на глубине (1 раз в неделю)</p>
         </div>
         <p style="margin-left:26px;font-weight:600;color:#305d9f">27,50 руб./занятие в абонементе</p>
-        <span class="service-price-tag" style="margin-top:28px">Записаться →</span>
+        <span class="service-price-tag" style="margin-top:28px;cursor:pointer" onclick="openModal('modal-signup')">Записаться →</span>
       </div>
     </div>
 
@@ -1953,7 +2106,7 @@ footer {
         <h2>Разовое занятие плаванием</h2>
         <p>Идеальный формат для тех, кто не готов приобретать абонемент или предпочитает гибкий график. Познакомьтесь с бассейном, тренером и форматом занятий без долгосрочных обязательств.</p>
         <p>Отработка техники плавания, выполнение упражнений на развитие выносливости и силы.</p>
-        <span class="service-price-tag" style="margin-top:auto">35 руб / занятие</span>
+        <span class="service-price-tag" style="margin-top:auto;cursor:pointer" onclick="selectPrice(document.querySelector('.price-badge'),'35 руб — разовое занятие');openModal('modal-signup')">35 руб / занятие</span>
       </div>
     </div>
 
@@ -1967,7 +2120,7 @@ footer {
         <h2>Индивидуальные занятия по плаванию</h2>
         <p>Для многих людей вода — это зона стресса. Индивидуальный тренер находится рядом на расстоянии вытянутой руки, что помогает преодолеть страх и сделать первый выдох в воду.</p>
         <p>Занятие строится под ваш темп. Если вы устали — тренер даст отдохнуть, если энергии много — увеличит нагрузку. Отсутствие сравнения с группой.</p>
-        <span class="service-price-tag" style="margin-top:auto">60 руб / занятие</span>
+        <span class="service-price-tag" style="margin-top:auto;cursor:pointer" onclick="selectPrice(document.querySelectorAll('.price-badge')[1],'60 руб — занятие (расширенное)');openModal('modal-signup')">60 руб / занятие</span>
       </div>
     </div>
 
@@ -2023,8 +2176,8 @@ footer {
         <p>Подпишитесь, чтобы получать последние новости и обновления о нас.<br>Мы обещаем не рассылать вам спам!</p>
       </div>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter email address">
-        <button>Продолжить</button>
+        <input type="email" id="nl-email-3" placeholder="Enter email address">
+        <button onclick="submitNewsletterInline('nl-email-3')">Продолжить</button>
       </div>
     </div>
   </section>
@@ -2154,8 +2307,8 @@ footer {
         <p>Подпишитесь, чтобы получать последние новости и обновления о нас.<br>Мы обещаем не рассылать вам спам!</p>
       </div>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter email address">
-        <button>Продолжить</button>
+        <input type="email" id="nl-email-4" placeholder="Enter email address">
+        <button onclick="submitNewsletterInline('nl-email-4')">Продолжить</button>
       </div>
     </div>
   </section>
@@ -2248,7 +2401,7 @@ footer {
         <textarea placeholder="Ваше сообщение..."></textarea>
       </div>
       <div class="form-submit">
-        <button class="btn-submit">Продолжить</button>
+        <button class="btn-submit" onclick="submitContactForm()">Продолжить</button>
       </div>
     </div>
   </div>
@@ -2263,8 +2416,8 @@ footer {
         <p>Подпишитесь, чтобы получать последние новости и обновления о нас.<br>Мы обещаем не рассылать вам спам!</p>
       </div>
       <div class="newsletter-form">
-        <input type="email" placeholder="Enter email address">
-        <button>Продолжить</button>
+        <input type="email" id="nl-email-5" placeholder="Enter email address">
+        <button onclick="submitNewsletterInline('nl-email-5')">Продолжить</button>
       </div>
     </div>
   </section>
@@ -2296,7 +2449,79 @@ footer {
 <!-- ──────────────────────────────────────────
    JS: page navigation
 ────────────────────────────────────────── -->
+<!-- ══════════════════════════════════════════
+     MODAL — ЗАПИСЬ
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-signup">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-signup')">✕</button>
+    <div id="signup-form-wrap">
+      <h2>Записаться на занятие</h2>
+      <p class="modal-sub">Выберите тип занятия и оставьте контакты — мы свяжемся с вами</p>
+      <div class="modal-price-badges">
+        <div class="price-badge selected" onclick="selectPrice(this,'35 руб — разовое занятие')">35 руб / занятие</div>
+        <div class="price-badge" onclick="selectPrice(this,'60 руб — занятие (расширенное)')">60 руб / занятие</div>
+      </div>
+      <div class="modal-field">
+        <label>Имя</label>
+        <input type="text" id="su-name" placeholder="Ваше имя">
+      </div>
+      <div class="modal-field">
+        <label>Телефон</label>
+        <input type="tel" id="su-phone" placeholder="+375 XX XXX XX XX">
+      </div>
+      <div class="modal-field">
+        <label>Email</label>
+        <input type="email" id="su-email" placeholder="example@email.com">
+      </div>
+      <div class="modal-field">
+        <label>Комментарий (необязательно)</label>
+        <textarea id="su-message" placeholder="Возраст, пожелания, вопросы..."></textarea>
+      </div>
+      <button class="modal-submit" id="su-btn" onclick="submitSignup()">Отправить заявку</button>
+    </div>
+    <div class="modal-success" id="signup-success">
+      <div class="success-icon">🏊</div>
+      <h3>Заявка принята!</h3>
+      <p>Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MODAL — ПОДПИСКА
+══════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-subscribe">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-subscribe')">✕</button>
+    <div id="sub-form-wrap">
+      <h2>Подписаться на новости</h2>
+      <p class="modal-sub">Введите email — будем присылать новости и обновления. Без спама!</p>
+      <div class="modal-field">
+        <label>Имя</label>
+        <input type="text" id="sub-name" placeholder="Ваше имя">
+      </div>
+      <div class="modal-field">
+        <label>Email</label>
+        <input type="email" id="sub-email" placeholder="example@email.com">
+      </div>
+      <button class="modal-submit" id="sub-btn" onclick="submitSubscribe()">Продолжить</button>
+    </div>
+    <div class="modal-success" id="sub-success">
+      <div class="success-icon">✉️</div>
+      <h3>Вы подписаны!</h3>
+      <p>Спасибо! Теперь вы будете получать наши новости и обновления.</p>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ── CONFIG ── */
+const TG_TOKEN = '8756957352:AAHs4GQomrPosUmfBKT0qqxXazlDJW5Tsoc';
+const TG_CHAT  = '7072316538';
+const GS_URL   = 'https://script.google.com/macros/s/AKfycbyPoi7D9NbdW9ap6nJtTQ0T3jx0LQfaNNNByjJP3fl1y9BLKF4ntcEapWKM6jfuAvOv/exec';
+
+/* ── NAVIGATION ── */
 const PAGES = ['home','about','services','news','contact'];
 
 function showPage(id) {
@@ -2324,6 +2549,153 @@ function closeMobileMenu() {
   menu.classList.remove('open');
   burger.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+/* ── MODAL ── */
+let selectedPrice = '35 руб — разовое занятие';
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function selectPrice(el, val) {
+  document.querySelectorAll('.price-badge').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPrice = val;
+}
+
+/* закрытие по клику на фон */
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal(overlay.id);
+  });
+});
+
+/* ── TELEGRAM ── */
+async function sendTelegram(text) {
+  try {
+    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' })
+    });
+  } catch(e) { console.error('TG error', e); }
+}
+
+/* ── GOOGLE SHEETS ── */
+async function sendSheets(data) {
+  try {
+    await fetch(GS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch(e) { console.error('GS error', e); }
+}
+
+/* ── ЗАПИСЬ ── */
+async function submitSignup() {
+  const name    = document.getElementById('su-name').value.trim();
+  const phone   = document.getElementById('su-phone').value.trim();
+  const email   = document.getElementById('su-email').value.trim();
+  const message = document.getElementById('su-message').value.trim();
+
+  if (!name || !phone) {
+    alert('Пожалуйста, заполните имя и телефон');
+    return;
+  }
+
+  const btn = document.getElementById('su-btn');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const tgText = `🏊 <b>Новая заявка на занятие!</b>\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n📧 Email: ${email || '—'}\n💰 Тариф: ${selectedPrice}\n💬 Комментарий: ${message || '—'}`;
+
+  await sendTelegram(tgText);
+  await sendSheets({ type: 'Запись', name, phone, email, message: `${selectedPrice}. ${message}` });
+
+  document.getElementById('signup-form-wrap').style.display = 'none';
+  document.getElementById('signup-success').style.display = 'flex';
+  setTimeout(() => closeModal('modal-signup'), 3500);
+  /* сброс */
+  setTimeout(() => {
+    document.getElementById('signup-form-wrap').style.display = 'block';
+    document.getElementById('signup-success').style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'Отправить заявку';
+    ['su-name','su-phone','su-email','su-message'].forEach(id => document.getElementById(id).value = '');
+  }, 4000);
+}
+
+/* ── ПОДПИСКА ── */
+async function submitSubscribe() {
+  const name  = document.getElementById('sub-name').value.trim();
+  const email = document.getElementById('sub-email').value.trim();
+
+  if (!email || !email.includes('@')) {
+    alert('Пожалуйста, введите корректный email');
+    return;
+  }
+
+  const btn = document.getElementById('sub-btn');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const tgText = `📧 <b>Новая подписка на новости!</b>\n\n👤 Имя: ${name || '—'}\n📧 Email: ${email}`;
+
+  await sendTelegram(tgText);
+  await sendSheets({ type: 'Подписка', name, email });
+
+  document.getElementById('sub-form-wrap').style.display = 'none';
+  document.getElementById('sub-success').style.display = 'flex';
+  setTimeout(() => closeModal('modal-subscribe'), 3500);
+  setTimeout(() => {
+    document.getElementById('sub-form-wrap').style.display = 'block';
+    document.getElementById('sub-success').style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'Продолжить';
+    ['sub-name','sub-email'].forEach(id => document.getElementById(id).value = '');
+  }, 4000);
+}
+
+/* ── Подписка прямо из newsletter-формы ── */
+function submitNewsletterInline(emailInputId) {
+  const email = document.getElementById(emailInputId).value.trim();
+  if (!email || !email.includes('@')) { alert('Введите корректный email'); return; }
+  document.getElementById('sub-email').value = email;
+  openModal('modal-subscribe');
+}
+
+/* ── Контактная форма ── */
+async function submitContactForm() {
+  const name    = document.querySelector('#page-contact .form-grp:nth-child(1) input')?.value.trim() || '';
+  const surname = document.querySelector('#page-contact .form-grp:nth-child(2) input')?.value.trim() || '';
+  const email   = document.querySelector('#page-contact input[type="email"]')?.value.trim() || '';
+  const message = document.querySelector('#page-contact textarea')?.value.trim() || '';
+
+  if (!email || !email.includes('@')) { alert('Введите корректный email'); return; }
+
+  const btn = document.querySelector('.btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем...';
+
+  const tgText = `📬 <b>Новое сообщение с сайта!</b>\n\n👤 Имя: ${name} ${surname}\n📧 Email: ${email}\n💬 Сообщение: ${message || '—'}`;
+
+  await sendTelegram(tgText);
+  await sendSheets({ type: 'Контакт', name: `${name} ${surname}`, email, message });
+
+  btn.textContent = '✓ Отправлено!';
+  btn.style.background = '#4caf50';
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = 'Продолжить';
+    btn.style.background = '';
+  }, 3000);
 }
 </script>
 </body>
