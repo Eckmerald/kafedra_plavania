@@ -1642,22 +1642,32 @@ footer {
   line-height: 1.6;
 }
 .modal-price-badges {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
   margin-bottom: 20px;
-  flex-wrap: wrap;
 }
 .price-badge {
   background: #f0f5ff;
   border: 2px solid #dde6f5;
   border-radius: 10px;
-  padding: 10px 18px;
-  font-size: 14px;
+  padding: 10px 8px;
+  font-size: 12px;
   font-weight: 600;
   color: #305d9f;
   cursor: pointer;
   transition: all .2s;
   font-family: 'Unbounded', sans-serif;
+  text-align: center;
+  line-height: 1.4;
+}
+.price-badge small {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0.75;
+  margin-top: 2px;
 }
 .price-badge.selected,
 .price-badge:hover {
@@ -1668,6 +1678,7 @@ footer {
 @media (max-width: 480px) {
   .modal-box { padding: 32px 20px 24px; }
   .modal-box h2 { font-size: 18px; }
+  .modal-price-badges { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -2064,12 +2075,12 @@ footer {
           <span class="check">✓</span>
           <p>Абонемент на групповое обучение для детей от 5 лет (2 раза в неделю)</p>
         </div>
-        <p style="margin-left:26px;font-weight:600;color:#305d9f">26,25 руб./занятие в абонементе</p>
+        <p style="margin-left:26px;font-weight:600;color:#305d9f">25 руб./занятие в абонементе</p>
         <div class="service-check">
           <span class="check">✓</span>
           <p>Абонемент на групповое обучение для детей от 5 лет (1 раз в неделю)</p>
         </div>
-        <p style="margin-left:26px;font-weight:600;color:#305d9f">27,50 руб./занятие в абонементе</p>
+        <p style="margin-left:26px;font-weight:600;color:#305d9f">30 руб./занятие в абонементе</p>
         <span class="service-price-tag" style="margin-top:28px;cursor:pointer" onclick="openModal('modal-signup')">Записаться →</span>
       </div>
     </div>
@@ -2086,12 +2097,12 @@ footer {
           <span class="check">✓</span>
           <p>Совершенствование техники для умеющих держаться на глубине (2 раза в неделю)</p>
         </div>
-        <p style="margin-left:26px;font-weight:600;color:#305d9f">26,25 руб./занятие в абонементе</p>
+        <p style="margin-left:26px;font-weight:600;color:#305d9f">25 руб./занятие в абонементе</p>
         <div class="service-check">
           <span class="check">✓</span>
           <p>Совершенствование техники для умеющих держаться на глубине (1 раз в неделю)</p>
         </div>
-        <p style="margin-left:26px;font-weight:600;color:#305d9f">27,50 руб./занятие в абонементе</p>
+        <p style="margin-left:26px;font-weight:600;color:#305d9f">30 руб./занятие в абонементе</p>
         <span class="service-price-tag" style="margin-top:28px;cursor:pointer" onclick="openModal('modal-signup')">Записаться →</span>
       </div>
     </div>
@@ -2459,8 +2470,12 @@ footer {
       <h2>Записаться на занятие</h2>
       <p class="modal-sub">Выберите тип занятия и оставьте контакты — мы свяжемся с вами</p>
       <div class="modal-price-badges">
-        <div class="price-badge selected" onclick="selectPrice(this,'35 руб — разовое занятие')">35 руб / занятие</div>
-        <div class="price-badge" onclick="selectPrice(this,'60 руб — занятие (расширенное)')">60 руб / занятие</div>
+        <div class="price-badge selected" onclick="selectPrice(this,'25 руб — Малютка, дети от 5 лет, группа 2×/нед')">🏊 Малютка 2×/нед<br><small>25 руб/занятие</small></div>
+        <div class="price-badge" onclick="selectPrice(this,'30 руб — Малютка, дети от 5 лет, группа 1×/нед')">🏊 Малютка 1×/нед<br><small>30 руб/занятие</small></div>
+        <div class="price-badge" onclick="selectPrice(this,'25 руб — Глубокий бассейн, совершенствование техники, 2×/нед')">🌊 Глубокий 2×/нед<br><small>25 руб/занятие</small></div>
+        <div class="price-badge" onclick="selectPrice(this,'30 руб — Глубокий бассейн, совершенствование техники, 1×/нед')">🌊 Глубокий 1×/нед<br><small>30 руб/занятие</small></div>
+        <div class="price-badge" onclick="selectPrice(this,'35 руб — разовое занятие')">🎫 Разовое<br><small>35 руб</small></div>
+        <div class="price-badge" onclick="selectPrice(this,'60 руб — индивидуальное занятие')">⭐ Индивидуальное<br><small>60 руб</small></div>
       </div>
       <div class="modal-field">
         <label>Имя</label>
@@ -2552,7 +2567,7 @@ function closeMobileMenu() {
 }
 
 /* ── MODAL ── */
-let selectedPrice = '35 руб — разовое занятие';
+let selectedPrice = '25 руб — Малютка, дети от 5 лет, группа 2×/нед';
 
 function openModal(id) {
   document.getElementById(id).classList.add('open');
